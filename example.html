@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Frontier Example</title>
+  </head>
+  <body>
+    <div id="frontier"></div>
+    <script src="elm.js"></script>
+    <script>
+    var app = Elm.Example.fullscreen();
+
+    app.ports.intOut.subscribe(function(n) {
+    return n + 8888;
+    });
+
+    function spellCheck(word) {
+    // have a real implementation!
+    return [];
+    }
+    </script>
+  </body>
