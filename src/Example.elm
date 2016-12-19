@@ -2,15 +2,17 @@ port module Example exposing (..)
 
 import Html.App as Html
 import Html exposing (..)
-import Frontier exposing (toJson, fromJson, toJsonTask, fromJsonTask, responsePort)
-import Task
+import Frontier exposing (toJson, fromJson, toJsonTask, fromJsonTask, taskPort)
+import Task exposing (Task)
 import Html.Events exposing (onFocus, onInput, onBlur, onClick)
 
 
 type Msg
     = EncodeObject Movie
     | Encoded String
-    | TestInt
+    | TestTaskInt
+    | SetInt Int
+    | Error String
     | DecodeMovie String
 
 
@@ -18,6 +20,7 @@ type alias Model =
     { json : String
     , movie : Maybe Movie
     , testInt : Int
+    , error : String
     }
 
 
@@ -37,9 +40,9 @@ port intOut : Int -> Cmd x
 port intIn : (Int -> x) -> Sub x
 
 
-addPort : Int -> Result String Int
-addPort =
-    responsePort "kobeJones" intOut intIn
+addingTask : Int -> Task String Int
+addingTask =
+    taskPort "kobeJones" intOut intIn
 
 
 
@@ -97,13 +100,15 @@ update msg model =
         Encoded s ->
             { model | json = s } ! []
 
-        TestInt ->
-            { model
-                | testInt =
-                    Result.withDefault 0 <|
-                        addPort model.testInt
-            }
-                ! []
+        TestTaskInt ->
+            model
+                ! [ Task.perform Error SetInt (addingTask model.testInt) ]
+
+        SetInt n ->
+            { model | testInt = n } ! []
+
+        Error s ->
+            { model | error = s } ! []
 
         DecodeMovie json ->
             { model | movie = Result.toMaybe <| fromJson movieIn json } ! []
@@ -122,8 +127,9 @@ view model =
         , h2 [] [ text "decoded movie:" ]
         , button [ onClick <| DecodeMovie model.json ] [ text "decode movie json" ]
         , div [] [ text <| Maybe.withDefault "nothing" (Maybe.map toString model.movie) ]
-        , button [ onClick <| TestInt ] [ text "Test Int" ]
+        , button [ onClick <| TestTaskInt ] [ text "Test Task Int" ]
         , div [] [ text <| "Int is: " ++ toString model.testInt ]
+        , div [] [ text <| "Error: " ++ model.error ]
         ]
 
 
@@ -134,7 +140,7 @@ view model =
 main : Program Never
 main =
     Html.program
-        { init = { movie = Nothing, json = "", testInt = 0 } ! []
+        { init = { movie = Nothing, json = "", testInt = 0, error = "" } ! []
         , update = update
         , subscriptions = always Sub.none
         , view = view

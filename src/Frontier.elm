@@ -1,4 +1,4 @@
-module Frontier exposing (toJson, fromJson, toJsonTask, fromJsonTask, responsePort)
+module Frontier exposing (toJson, fromJson, toJsonTask, fromJsonTask, taskPort)
 
 import Native.Frontier
 import Task exposing (Task, succeed, fail)
@@ -52,3 +52,8 @@ type alias JsFunctionName =
 responsePort : JsFunctionName -> OutputPort a x -> InputPort b y -> a -> Result String b
 responsePort jsfn outp inp obj =
     Native.Frontier.responsePort jsfn outp inp obj
+
+
+taskPort : JsFunctionName -> OutputPort a x -> InputPort b y -> a -> Task String b
+taskPort jsfn outp inp obj =
+    Native.Frontier.taskPort jsfn outp inp obj
