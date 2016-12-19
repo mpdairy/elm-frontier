@@ -8,8 +8,9 @@
     <script>
     var app = Elm.Example.fullscreen();
 
-    function kobeJones(n) {
-    return n + 8883838;
+    function kobeJones(ret, n) {
+    console.log("ok coral");
+    setTimeout(function(){ret.succeed(n + 1);}, 3000);
     }
     
     app.ports.intOut.subscribe(function(n) {

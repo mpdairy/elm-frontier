@@ -76,6 +76,31 @@ var _mpdairy$elm_frontier$Native_Frontier = function() {
           return callback(_elm_lang$core$Native_Scheduler.fail(err));
         }
 
+        var succeedCallback = function(retJsObj) {
+          var converter2 = _elm_lang$core$Native_Platform.effectManagers[inPort].converter;
+
+          var retElmObj = A2(_elm_lang$core$Json_Decode$decodeValue, converter2, retJsObj);
+          if (retElmObj.ctor == "Ok") {
+            return callback(_elm_lang$core$Native_Scheduler.succeed(retElmObj._0));
+          }
+          else {
+            return callback(_elm_lang$core$Native_Scheduler.fail(retElmObj._0));
+          }
+        }
+
+        var failCallback = function(errorMsg) {
+          return callback(_elm_lang$core$Native_Scheduler.fail(errorMsg));
+        }
+        var ret = { succeed : succeedCallback,
+                    fail : failCallback
+                    }
+        try {
+          jsFn(ret, jsObj);
+        }
+        catch (err) {
+          return callback(_elm_lang$core$Native_Scheduler.fail(err));
+        }
+        /*
         try {
           var retJsObj = jsFn(jsObj);
         }
@@ -91,7 +116,7 @@ var _mpdairy$elm_frontier$Native_Frontier = function() {
         }
         else {
           return callback(_elm_lang$core$Native_Scheduler.fail(retElmObj._0));
-        }
+        }*/
       });
     /*
 
