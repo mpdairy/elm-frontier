@@ -45,6 +45,10 @@ fromJsonTask inPort json =
 --
 
 
-responsePort : OutputPort a x -> InputPort b y -> a -> Result String b
-responsePort outp inp obj =
-    Native.Frontier.responsePort outp inp obj
+type alias JsFunctionName =
+    String
+
+
+responsePort : JsFunctionName -> OutputPort a x -> InputPort b y -> a -> Result String b
+responsePort jsfn outp inp obj =
+    Native.Frontier.responsePort jsfn outp inp obj

@@ -39,7 +39,7 @@ port intIn : (Int -> x) -> Sub x
 
 addPort : Int -> Result String Int
 addPort =
-    responsePort intOut intIn
+    responsePort "kobeJones" intOut intIn
 
 
 

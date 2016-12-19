@@ -1,4 +1,6 @@
-var _mpdairy$elm_autojson$Native_Frontier = function() {
+var jim = "Hello dougy";
+
+var _mpdairy$elm_frontier$Native_Frontier = function() {
 
   var toJson = function(portFn, elm_obj) {
     var portName = portFn(null).home;
@@ -26,7 +28,7 @@ var _mpdairy$elm_autojson$Native_Frontier = function() {
     }
   }
 
-  var responsePort = function(outPortFn, inPortFn, elmObj) {
+  var responsePort = function(fnName, outPortFn, inPortFn, elmObj) {
     var outPort = outPortFn(null).home;
     var inPort = inPortFn(null).home;
     var jsObj = null;
@@ -42,7 +44,11 @@ var _mpdairy$elm_autojson$Native_Frontier = function() {
       jsObj = converter1(elmObj);
     }
 
-    var retObj = jsObj + 55;
+    var jsFn = eval(fnName);
+
+
+
+    var retObj = jsFn(jsObj);
 
     
     var converter2 = _elm_lang$core$Native_Platform.effectManagers[inPort].converter;
@@ -59,6 +65,6 @@ var _mpdairy$elm_autojson$Native_Frontier = function() {
   return {
     toJson : F2(toJson),
     fromJson : F2(fromJson),
-    responsePort : F3(responsePort)
+    responsePort : F4(responsePort)
   };}
 ();
