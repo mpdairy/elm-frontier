@@ -1,4 +1,4 @@
-module Frontier exposing (toJson, fromJson, toJsonTask, fromJsonTask, taskPort)
+module Frontier exposing (toJson, fromJson, call)
 
 import Native.Frontier
 import Task exposing (Task, succeed, fail)
@@ -16,44 +16,24 @@ type alias JsonString =
     String
 
 
-toJson : OutputPort elmObject msg -> elmObject -> JsonString
+toJson : OutputPort elmObject msg -> elmObject -> Task String JsonString
 toJson outPort elmObject =
     Native.Frontier.toJson outPort elmObject
 
 
-fromJson : InputPort elmObject msg -> JsonString -> Result String elmObject
+fromJson : InputPort elmObject msg -> JsonString -> Task String elmObject
 fromJson inPort json =
     Native.Frontier.fromJson inPort json
-
-
-toJsonTask : OutputPort elmObject msg -> elmObject -> Task String JsonString
-toJsonTask outPort elmObject =
-    succeed (toJson outPort elmObject)
-
-
-fromJsonTask : InputPort elmObject msg -> JsonString -> Task String elmObject
-fromJsonTask inPort json =
-    case fromJson inPort json of
-        Err e ->
-            fail e
-
-        Ok obj ->
-            succeed obj
 
 
 
 --
 
 
-type alias JsFunctionName =
+type alias OuterFunctionName =
     String
 
 
-responsePort : JsFunctionName -> OutputPort a x -> InputPort b y -> a -> Result String b
-responsePort jsfn outp inp obj =
-    Native.Frontier.responsePort jsfn outp inp obj
-
-
-taskPort : JsFunctionName -> OutputPort a x -> InputPort b y -> a -> Task String b
-taskPort jsfn outp inp obj =
-    Native.Frontier.taskPort jsfn outp inp obj
+call : OutputPort a x -> InputPort b y -> OuterFunctionName -> a -> Task String b
+call outp inp jsfn obj =
+    Native.Frontier.call outp inp jsfn obj

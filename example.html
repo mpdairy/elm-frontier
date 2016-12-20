@@ -8,18 +8,14 @@
     <script>
     var app = Elm.Example.fullscreen();
 
-    function kobeJones(ret, n) {
-    console.log("ok coral");
-    setTimeout(function(){ret.succeed(n + 1);}, 3000);
+    function delayedAddOne(ret, n) {
+        setTimeout(function(){ret.succeed(parseInt(n/2));}, 3000);
     }
-    
-    app.ports.intOut.subscribe(function(n) {
-    return n + 8888;
-    });
 
-    function spellCheck(word) {
-    // have a real implementation!
-    return [];
+    function kobeJones(ret, movie) {
+        movie.title = movie.title + " (Kobe Jones Rules)";
+        ret.succeed (movie);
     }
+
     </script>
   </body>
