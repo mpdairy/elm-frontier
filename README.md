@@ -8,7 +8,7 @@ and JavaScript. It provides three main functions:
 * `call` - calls a JavaScript function that returns a value to Elm as
 a `Task`
 
-Each function returns as an Elm `Task` with a response value or an explanatory
+Each function returns an Elm `Task` with a response value or an explanatory
 String error. It works with both `0.17` and `0.18`.
 
 ## Why?
