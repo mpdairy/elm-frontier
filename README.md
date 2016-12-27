@@ -163,6 +163,10 @@ If you want to indicate that the JavaScript function has failed, you can use
 `ret.fail("The function failed because...");` in your JavaScript
 function to send back an error to Elm.
 
+Note that JavaScript's `eval` is called on the `OuterFunctionName`
+string that you supply to resolve the function. To avoid security
+problems, you shouldn't let users somehow supply the function name.
+
 ## Installation
 
 Elm-Frontier uses a native javascript file and hasn't been approved to
