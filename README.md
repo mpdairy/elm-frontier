@@ -58,7 +58,7 @@ Strings, Maybes, Lists, Arrays, Tuples, Json.Values, and concrete records.
 ## Frontier Type Aliases
 
 These are type aliases for outgoing/incoming port declarations. `msg`
-should remain polymorphic in your declarations for optimum compatibility.
+should remain polymorphic in your ports for optimum compatibility.
 
 ### OutputPort
 ```
@@ -136,7 +136,7 @@ In Elm:
 ```
 delayedAddingTask : Int -> Task String Int
 delayedAddingTask =
-    Frontier.call intOut intIn "delayedAddOne"
+    Frontier.call intOut intIn "delayedAddOneHalf"
 ```
 
 In JavaScript:
@@ -144,7 +144,7 @@ In JavaScript:
     <script>
     var app = Elm.Example.fullscreen();
 
-    function delayedAddOne(ret, n) {
+    function delayedAddOneHalf(ret, n) {
         setTimeout(function(){ret.succeed(parseInt(n/2));}, 3000);
     }
     </script>
