@@ -134,6 +134,10 @@ seconds after it is called.
 In Elm:
 
 ```
+port intOut : Int -> Cmd x
+
+port intIn : (Int -> x) -> Sub x
+
 delayedAddingTask : Int -> Task String Int
 delayedAddingTask =
     Frontier.call intOut intIn "delayedAddOneHalf"
