@@ -1,14 +1,14 @@
 # Elm-Frontier
 
-This library helps you to operate more easily at the frontier of Elm
+This library helps you operate more easily at the frontier of Elm
 and JavaScript. It provides three main functions:
 
-* `toJson` - automatically converts an Elm object to a Json string.
-* `fromJson` - automatically converts a Json string to an Elm object.
+* `toJson` - automatically encodes an Elm object to a Json string
+* `fromJson` - automatically decodes a Json string to an Elm object
 * `call` - calls foreign JavaScript function that returns a value to
-Elm.
+Elm
 
-Each function returns as an Elm Task with a value or an explanitory
+Each function returns as an Elm `Task` with a response value or an explanatory
 String error.
 
 ## Why?
@@ -16,10 +16,13 @@ String error.
 Using `toJson` and `fromJson` provides an easy and non-tedious way to
 serialize and desearialize Elm objects. The normal method is to write Json
 Encoders or Decoders, but this takes a long time and is prone to
-programming errors. `fromJson` could also be used in a task chain with
-the `HTTP` library to convert Json from foreign APIs, but if you want
-to transform the structure of the data, you will still need to write a
-Decoder.
+programming errors. `fromJson` and `toJson` automatically convert
+without the use of developer-specified encoders/decoders.
+
+Since `toJson`, `fromJson`, and `call` each return a `Task`, they can
+be easily chained together with other `Task`s using `Task.andThen`. For example,
+`fromJson` could be chained after a call to `Http.getString`
+to convert Json from a REST Api.
 
 Using the standard ports system in Elm, to call into JavaScript
 requires that you make a separate `Cmd` call to run the JavaScript
