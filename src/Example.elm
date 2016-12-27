@@ -40,6 +40,17 @@ port intOut : Int -> Cmd x
 port intIn : (Int -> x) -> Sub x
 
 
+
+--
+
+
+port bill : (Joe -> x) -> Sub x
+
+
+type Joe
+    = Billy
+
+
 delayedAddingTask : Int -> Task String Int
 delayedAddingTask =
     Frontier.call intOut intIn "delayedAddOne"
@@ -135,7 +146,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Automatic JSON Conversion" ]
+        [ div [] [ text "Make sure to load this through example.html or the external calls won't work." ]
+        , h1 [] [ text "Automatic JSON Conversion" ]
         , h3 [] [ text "Original movie elm object:" ]
         , div [] [ text <| toString megamovie ]
         , button [ onClick <| EncodeMovie megamovie ] [ text "automatically convert movie to Json" ]
@@ -146,7 +158,8 @@ view model =
 
                 Just json ->
                     [ text json
-                    , button [ onClick <| DecodeMovie json ] [ text "automatically decode from Json back into Movie object" ]
+                    , div []
+                        [ button [ onClick <| DecodeMovie json ] [ text "automatically decode from Json back into Movie object" ] ]
                     ]
         , div [] [ text <| Maybe.withDefault "" (Maybe.map toString model.movie) ]
         , h1 [] [ text "Call externel functions: " ]

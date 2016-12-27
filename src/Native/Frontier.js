@@ -1,5 +1,3 @@
-var jim = "Hello dougy";
-
 var _mpdairy$elm_frontier$Native_Frontier = function() {
 
   var toJson = function(portFn, elm_obj) {
