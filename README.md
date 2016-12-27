@@ -55,6 +55,8 @@ The Elm objects that you can convert automatically are limited to the
 ones that can be converted by Elm's port system: Ints, Floats, Bools,
 Strings, Maybes, Lists, Arrays, Tuples, Json.Values, and concrete records.
 
+## Frontier
+
 ### OutputPort
 ```
 type alias OutputPort a msg =
