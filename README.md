@@ -55,7 +55,7 @@ The Elm objects that you can convert automatically are limited to the
 ones that can be converted by Elm's port system: Ints, Floats, Bools,
 Strings, Maybes, Lists, Arrays, Tuples, Json.Values, and concrete records.
 
-## Frontier
+## Frontier Type Aliases for Ports
 
 ### OutputPort
 ```
@@ -74,6 +74,8 @@ type alias InputPort a msg =
 Standard input port definition. `port intIn : (Int -> x) -> Sub x`
 would declare an input port named `intIn` that converts incoming
 JavaScript ints.
+
+## Frontier Functions
 
 ### `toJson`
 
