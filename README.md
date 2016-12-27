@@ -157,7 +157,7 @@ In JavaScript:
 Then calling `delayedAddingTask 8` using `Task.attempt` or
 `Task.perform` would return `12` three seconds later.
 
-If want to indicate that the JavaScript function has failed, you can use
+If you want to indicate that the JavaScript function has failed, you can use
 `ret.fail("The function failed because...");` to send back an error to
 Elm.
 
