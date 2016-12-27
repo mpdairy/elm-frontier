@@ -166,10 +166,10 @@ Elm.
 Elm-Frontier uses a native javascript file and hasn't been approved
 from above to be included in the Elm package repository (I haven't tried),
 so to use you must currently download `src/Frontier.elm` into the
-`src/` folder of your project, and `src/Native/Frontier.js` into
+`src/` folder of your project, and download `src/Native/Frontier.js` into
 `src/Native/`.
 
-Then, open up your `src/Native/Frontier.js` in a test editor. The
+Then, open up your `src/Native/Frontier.js` in a text editor. The
 first line of the file is this:
 
 ```
