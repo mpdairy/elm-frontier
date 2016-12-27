@@ -1,7 +1,6 @@
 port module Example exposing (..)
 
-import Html.App as Html
-import Html exposing (..)
+import Html exposing (Html, div, h1, h3, button, text)
 import Frontier
 import Task exposing (Task)
 import Html.Events exposing (onFocus, onInput, onBlur, onClick)
@@ -42,13 +41,6 @@ port intIn : (Int -> x) -> Sub x
 
 
 --
-
-
-port bill : (Joe -> x) -> Sub x
-
-
-type Joe
-    = Billy
 
 
 delayedAddingTask : Int -> Task String Int
@@ -111,14 +103,14 @@ update msg model =
     case msg of
         EncodeMovie m ->
             model
-                ! [ Task.perform Error EncodedMovie <| Frontier.toJson movieOut m ]
+                ! [ Task.attempt (handleResult Error EncodedMovie) <| Frontier.toJson movieOut m ]
 
         EncodedMovie json ->
             { model | json = Just json } ! []
 
         TestTaskInt ->
             model
-                ! [ Task.perform Error SetInt <| delayedAddingTask model.testInt ]
+                ! [ Task.attempt (handleResult Error SetInt) <| delayedAddingTask model.testInt ]
 
         SetInt n ->
             { model | testInt = model.testInt + n } ! []
@@ -127,16 +119,26 @@ update msg model =
             { model | error = s } ! []
 
         DecodeMovie json ->
-            model ! [ Task.perform Error DecodedMovie <| Frontier.fromJson movieIn json ]
+            model ! [ Task.attempt (handleResult Error DecodedMovie) <| Frontier.fromJson movieIn json ]
 
         DecodedMovie movie ->
             { model | movie = Just movie } ! []
 
         TestTaskMovie ->
-            model ! [ Task.perform Error KobeMovie <| kobeJonesMovieTask model.kobeMovie ]
+            model ! [ Task.attempt (handleResult Error KobeMovie) <| kobeJonesMovieTask model.kobeMovie ]
 
         KobeMovie m ->
             { model | kobeMovie = m } ! []
+
+
+handleResult : (x -> msg) -> (a -> msg) -> Result x a -> msg
+handleResult failMsg succeedMsg r =
+    case r of
+        Err s ->
+            failMsg s
+
+        Ok obj ->
+            succeedMsg obj
 
 
 
@@ -177,7 +179,7 @@ view model =
 -- APP
 
 
-main : Program Never
+main : Program Never Model Msg
 main =
     Html.program
         { init =
