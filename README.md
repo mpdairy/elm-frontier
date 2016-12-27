@@ -24,15 +24,14 @@ be easily chained together with other `Task`s using `Task.andThen`. For example,
 `fromJson` could be chained after a call to `Http.getString`
 to convert Json from a REST Api.
 
-Using the standard ports system in Elm, to call into JavaScript
-requires that you make a separate `Cmd` call to run the JavaScript
-function, and then subscribe to a response as a `Sub`. This
-disconnect between the call and return of a function makes for some
-difficulties. For instance, you won't be sure which response `Sub`
-corresponds to which call you made with the `Cmd` unless you pass back
-some id or the original args. But, worst of all, it makes calling
-externel JavaScript functions impossible to chain together using
-`Task.andThen`.
+Using the standard ports system in Elm, calling into JavaScript
+requires that you generate a `Cmd` to run the JavaScript
+function, and then separately subscribe to a response as a `Sub`. This
+disconnect between the call and return of a function makes difficulty
+for the programmer. For instance, you can't be sure which port response `Sub`
+corresponds to which call you made with the port `Cmd` unless you pass back
+some id or the original args. Most limiting of all, you can't chain
+together external javascript functions as `Task`s.
 
 Frontier's `call` allows you to call any JavaScript function and
 receive the results as a normal Elm `Task`.
