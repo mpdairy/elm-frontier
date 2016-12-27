@@ -14,9 +14,9 @@ String error. It works with both `0.17` and `0.18`.
 ## Why?
 
 Using Frontier's `toJson` and `fromJson` provides an easy and non-tedious way to
-serialize and desearialize Elm objects. The normal method is to write Json
+serialize and desearialize Elm objects. The usual method is to write Json
 Encoders or Decoders, but this takes a long time and is prone to
-programming errors. `fromJson` and `toJson` automatically convert
+programming errors. Frontier's `fromJson` and `toJson` automatically convert
 without the use of developer-specified encoders/decoders.
 
 Since `toJson`, `fromJson`, and `call` each return a `Task`, they can
