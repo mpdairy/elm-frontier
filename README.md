@@ -5,8 +5,8 @@ and JavaScript. It provides three main functions:
 
 * `toJson` - automatically encodes an Elm object to a Json string
 * `fromJson` - automatically decodes a Json string to an Elm object
-* `call` - calls foreign JavaScript function that returns a value to
-Elm
+* `call` - calls a JavaScript function that returns a value to Elm as
+a `Task`
 
 Each function returns as an Elm `Task` with a response value or an explanatory
 String error. It works with both `0.17` and `0.18`.
