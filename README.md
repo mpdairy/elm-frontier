@@ -214,8 +214,11 @@ var _jburleydog$my_special_project$Native_Frontier = function() {
 
 ## Complete Example Usage
 
-See `example.html` and `src/Example.elm` for using `elm-frontier` with
-complex Elm objects.
+See
+[example.html](https://github.com/mpdairy/elm-frontier/blob/master/example.html)
+and
+[src/Example.elm](https://github.com/mpdairy/elm-frontier/blob/master/src/Example.elm)
+for using `elm-frontier` with complex Elm objects.
 
 ## Compatibility
 
