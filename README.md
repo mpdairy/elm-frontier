@@ -34,15 +34,15 @@ some id or the original args. Most limiting of all, you can't chain
 together external javascript functions as `Task`s.
 
 Frontier's `call` allows you to call any JavaScript function and
-receive the results as a normal Elm `Task`.
+receive the results as a normal Elm `Task`, immediately or delayed.
 
 ## How?
 
 You may have noticed that the Elm ports system already automatically
 converts Elm objects to JavaScript and vice versa. Whenever you declare
 an outgoing port, the Elm compiler will generate a converter function
-that converts Elm object to JavaScript, and generates a converter from
-JavaScript to Elm when you declare an incoming port.
+that converts an Elm object of the port's type to JavaScript. It also
+generates a converter from JavaScript to Elm when you declare an incoming port.
 
 Elm-Frontier uses these converter functions that the Elm compiler
 generates for ports. With Frontier, ports are used merely to convert
