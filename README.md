@@ -149,7 +149,7 @@ In JavaScript:
     var app = Elm.Example.fullscreen();
 
     function delayedAddOneHalf(ret, n) {
-        setTimeout(function(){ret.succeed(parseInt(n/2));}, 3000);
+        setTimeout(function(){ret.succeed(n + parseInt(n/2));}, 3000);
     }
     </script>
 ```
