@@ -20,7 +20,7 @@ programming errors. Frontier's `fromJson` and `toJson` automatically convert
 without the use of developer-specified encoders/decoders.
 
 Since `toJson`, `fromJson`, and `call` each return a `Task`, they can
-be easily chained together with other `Task`s using `Task.andThen`. For example,
+be chained together with other `Task`s using `Task.andThen`. For example,
 `fromJson` could be chained after a call to `Http.getString`
 to convert Json from a REST Api.
 
