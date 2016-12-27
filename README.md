@@ -222,5 +222,4 @@ will build "official" functionality similar to Frontier's into 0.19.
 
 However, there is no guarantee that he will and he might even somehow
 block access to the port converter functions that are essential for
-Frontier to work, so use at your own risk. Or, don't use and guarantee
-tedium.
+Frontier to work, so use at your own risk.
