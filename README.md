@@ -57,6 +57,9 @@ Strings, Maybes, Lists, Arrays, Tuples, Json.Values, and concrete records.
 
 ## Frontier Type Aliases
 
+These are type aliases for outgoing/incoming port declarations. `msg`
+should remain polymorphic in your declarations for optimum compatibility.
+
 ### OutputPort
 ```
 type alias OutputPort a msg =
