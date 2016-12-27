@@ -9,11 +9,11 @@ and JavaScript. It provides three main functions:
 Elm
 
 Each function returns as an Elm `Task` with a response value or an explanatory
-String error.
+String error. It works with both `0.17` and `0.18`.
 
 ## Why?
 
-Using `toJson` and `fromJson` provides an easy and non-tedious way to
+Using Frontier's `toJson` and `fromJson` provides an easy and non-tedious way to
 serialize and desearialize Elm objects. The normal method is to write Json
 Encoders or Decoders, but this takes a long time and is prone to
 programming errors. `fromJson` and `toJson` automatically convert
@@ -134,6 +134,8 @@ seconds after it is called.
 In Elm:
 
 ```
+import Frontier
+
 port intOut : Int -> Cmd x
 
 port intIn : (Int -> x) -> Sub x
