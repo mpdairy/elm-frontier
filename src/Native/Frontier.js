@@ -10,7 +10,7 @@ var _mpdairy$elm_frontier$Native_Frontier = function() {
           return callback(_elm_lang$core$Native_Scheduler.succeed(jsonString));
         }
         catch (err) {
-          return callback(_elm_lang$core$Native_Scheduler.call(err));
+          return callback(_elm_lang$core$Native_Scheduler.fail(err));
         }
       })
   };
